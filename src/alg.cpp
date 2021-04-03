@@ -11,9 +11,9 @@ return a;
 }
 int countPairs2(int *arr, int len, int value) {
 int a = 0, l = 0, r = len-1;
-while(l < r - 1){
+while(l < r - 1) {
 int m = (r + l)/2;
-if (arr[m] <= value) 
+if (arr[m] <= value)
 l = m;
 else
 r = m;
@@ -54,7 +54,6 @@ f++;
 l++;
 }
 a++;
-}
 }
 return a;
 }
