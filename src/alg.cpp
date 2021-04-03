@@ -4,50 +4,56 @@ int countPairs1(int *arr, int len, int value) {
 int a = 0;
 for (int i = 0; i < len-1; i++) {
 for (int j = i+1; j <= len; j++) {
-if (arr[i] + arr[j] == value) a=a+1 ;
+if ((arr[i] + arr[j]) == value) a=a+1;
 }
 }
 return a;
 }
 int countPairs2(int *arr, int len, int value) {
-int a = 0, l = 0;
-for (int i = 0; i < len; i++) {
-if (arr[i] >= value) {
-l = i;
-break;
+int a = 0, l = 0, r = len-1;
+while(l < r - 1){
+int m = (r + l)/2;
+if (arr[m] <= value) 
+l = m;
+else
+r = m;
 }
-}
+len = r - 1;
 for (int i = l; i >= 0; i--) {
 for (int j = 0; j < i; j++) {
 if (arr[i] + arr[j] == value)
 a++;
+if (arr[i] + arr[j] > value)
+break;
 }
 }
 return a;
 }
 int countPairs3(int *arr, int len, int value) {
-int count = 0, left = 0, right = len - 1;
-int a = 0, l = 0;
-for (int i = 0; i < len; i++) {
-if (arr[i] >= value) {
-l = i;
-break;
-}
-}
-cout << l << endl;
-for (int i = 0; i <= l; i++) {
-left = i + 1, right = l;
-while (left < right) {
-int m = (left + right) / 2;
-if (arr[m] < (value - arr[i]))
-left = m;
+int count = 0, l = 0, r = len - 1;
+while (l < r - 1) {
+int m = (l + r) / 2;
+if (arr[m] <= value)
+l = m;
 else
-right = m;
+r = m;
 }
-cout << left << endl;
-while (arr[left] == (value - arr[i])) {
+len = r - 1;
+for (int i = 0; i < len; i++) {
+l = i + 1, r = len - 1;
+int f = 0;
+  while (l < r) {
+int m = (l + r) / 2;
+if (arr[m] < (value - arr[i]))
+l = m + 1;
+else
+r = m;
+}
+while (arr[l] == (value - arr[i])) {
+f++;
+l++;
+}
 a++;
-left++;
 }
 }
 return a;
