@@ -53,7 +53,7 @@ while (arr[l] == (value - arr[i])) {
 f++;
 l++;
 }
-a++;
+a += f;
 }
 return a;
 }
